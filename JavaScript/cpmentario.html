@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Comentários de Post</h1>
+    <h3>Selecione um post para ver os comentários:</h3>
+    <select id="post">
+        <option id="opcao1" value="opcao1">Opção 1</option>
+        <option id="opcao2" value="opcao2">Opção 2</option>
+        <option id="opcao3" value="opcao3">Opção 3</option>
+    </select>
+    <div id="resultado"></div>
+    <script>
+        const post = [
+        {id: 1, title: "Introdução ao DOM"},
+        {id: 2, title: "Eventos em JavaScript"},
+        {id: 3, title: "Oque é uma API?"}
+        ]
+
+        const comentarios = [
+            
+        {postId: 1, Id: 1, name: "Ana", email:"ana@email.com", body: "Gostei do exemprlo do getElementById"},
+        {postId: 2, Id: 2, name: "Carla", email:"carla@email.com", body: "addEventListener é bemm melhor que onclick"},
+        {postId: 3, Id: 3, name: "Diego", email:"diego@email.com", body: "A analogia do garcom ajudou muito"},
+        {postId: 3, Id: 4, name: "Elisa", email:"elisa@email.com", body: "Quero testar o JSONPlaceholder"},
+        {postId: 3, Id: 5, name: "Fabio", email:"fabio@email.com", body: "E o método Post, como funciona?"},
+
+        ]
+
+        const selectElement = document.getElementById('post');
+        selectElement.addEventListener('change', function() {
+            const selectedPostId = parseInt(this.value.replace('opcao', ''));
+            const filteredComments = comentarios.filter(comment => comment.postId === selectedPostId);
+            document.getElementById('resultado').innerHTML = filteredComments.map(comment => `
+                <p><strong>${comment.name}</strong> <br>(${comment.email}): </br> <br> ${comment.body} </br></p>
+            `).join('');
+        });
+        document.getElementById('opcao1').textContent = post[0].title;
+        document.getElementById('opcao2').textContent = post[1].title
+        document.getElementById('opcao3').textContent = post[2].title
+    </script>
+</body>
+</html>

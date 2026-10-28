@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+        input[type="button"] {
+            padding: 5px 10px;
+        }
+        #resultador {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Busca de Posts</h1>
+    <input type="number" id="postId" placeholder="Digite o ID do post">
+    <input type="button" value="Buscar" onclick="busca()">
+    <div id="resultador"></div>
+    <script>
+        const post = [
+        {userId: 1, id: 1, title: "Primeiro Post", body: "Aprendendo a manipular o DOM"},
+        {userId: 1, id: 2, title: "Segundo Post", body: "Arrays de objetos são parecidos com o JSON de uma API"},
+        {userId: 2, id: 3, title: "Terceiro Post", body: "Em breve vamos buscar esses dados no servidor"},
+        {userId: 2, id: 4, title: "Quarto Post", body: "o método find enconttrra o primeiro item encontrado"},
+        {userId: 3, id: 5, title: "Quinto Post", body: "Se nada for encontraado, find devolve undefined"},
+
+        ]
+
+        function busca() { 
+            const idd = document.getElementById("postId").value;
+            const resultado = post.find((item) => item.id == idd);
+            if (resultado === undefined) {
+                document.getElementById("resultador").innerHTML = '<p>Post ' + idd + ' não encontrado.</p>';
+            } else {
+                document.getElementById("resultador").innerHTML = `
+                    <h2>${resultado.title}</h2>
+                    <p>${resultado.body}</p>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>

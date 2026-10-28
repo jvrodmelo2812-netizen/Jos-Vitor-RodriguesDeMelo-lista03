@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 5px 10px;
+        }   
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Alunos</h1>
+    <form>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="idade" name="idade"><br><br>
+
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade"><br><br>
+
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso" name="curso"><br><br>
+
+
+        <input type="submit" value="Cadastrar">
+        <div id="resultado"></div>
+        <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const idade = document.getElementById('idade').value;
+            const curso = document.getElementById('curso').value;
+
+            console.log(`Nome: ${nome}, Email: ${email}, Idade: ${idade}, Curso: ${curso}`);
+        });
+
+        fetch('alunos.json')
+            .then(response => response.json())
+            .then(data => {
+                const alunos = data.alunos;
+                const listaAlunos = document.createElement('<ul>');
+                alunos.forEach(aluno => {
+                    const item = document.createElement('li');
+                    item.textContent = `Nome: ${aluno.nome}, Email: ${aluno.email}, Idade: ${aluno.idade}, Curso: ${aluno.curso}`;
+                    listaAlunos.appendChild(item);
+                });
+                document.body.appendChild(listaAlunos);
+                html+= '</ul>';
+                listaAlunos.innerHTML = html;
+            })
+            .catch(error => console.error('Erro ao carregar os dados:', error));
+
+            </script>
+
+</body>
+    
+</html>
